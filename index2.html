@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="" id="code" placeholder="Enter Country Code ">
+    <button id="btn">Search</button>
+    <img id="imgs" src="" alt="">
+</body>
+<script>
+    // https://restcountries.com/v3.1/alpha/{code}
+    let countryCode = document.getElementById('code')
+    let SearchBtn = document.querySelector('#btn')
+
+
+    SearchBtn.addEventListener('click',()=>{
+        SearchCountry(countryCode.value)
+    })
+
+    async function SearchCountry(Cc){
+        let response = await fetch(`https://restcountries.com/v3.1/alpha/${Cc}`)
+        let data = await response.json()
+        console.log(data);
+        console.log(data[0].flags.png);
+        console.log(data[0].altSpellings);
+        document.getElementById('imgs').src = data[0].flags.svg;
+    }
+
+</script>
+</html>
